@@ -21,9 +21,21 @@ data1 <- cbind(data1, dateTime)
 data2 <- data1[data1$dateTime >= ymd('2007-02-01') & data1$dateTime < ymd('2007-02-03'),]
 
 ## Graphics
-png("plot3.png", width = 480, height = 480, units = "px", bg = "white")
+png("plot4.png", width = 480, height = 480, units = "px", bg = "white")
+par(mfrow=c(2,2))
+## Top-Left
+plot(data2$dateTime, data2$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power")
+
+## Top-Right
+plot(data2$dateTime, data2$Voltage, type = "l", xlab = "datetime", ylab = "Voltage")
+
+## Bottom-Left
 plot(data2$dateTime, data2$Sub_metering_1, type = "l", xlab = "", ylab = "Energy sub metering")
 lines(data2$dateTime, data2$Sub_metering_2, type = "l", xlab = "", ylab = "", col = "red")
 lines(data2$dateTime, data2$Sub_metering_3, type = "l", xlab = "", ylab = "", col = "blue")
 legend(x = "topright", legend = c("Sub metering 1","Sub metering 2", "Sub metering 3"), col=c("black", "red", "blue"), lwd = 1) 
+
+## Bottom-Right
+plot(data2$dateTime, data2$Global_reactive_power, type = "l", xlab = "datetime", ylab = "Global_reactive_power")
+
 dev.off()
